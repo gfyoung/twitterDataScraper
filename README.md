@@ -44,4 +44,8 @@ Python Twitter API Data Scraper
 
 - <b>NOTE</b>: In order for this code to run successfully, it required authentication with the Twitter API as well as a data file
   of usernames and Twitter IDs. If any of this information is omitted or incorrectly provided, the script will not work!
-  
+
+## Requirements
+- ```pandas``` (or ```python-pandas``` on ```Linux```)
+- ```tweepy```
+
