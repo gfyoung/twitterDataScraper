@@ -5,6 +5,30 @@ from time import sleep
 from pandas import DataFrame, read_csv
 
 
+def load_saved_progress():
+    try:
+        bad_df = read_csv(bad_filename, usecols=bad_columns)
+        start_index = max(bad_df.index) + 1
+
+        try:
+            tweet_df = read_csv(tweet_filename, usecols=tweet_columns)
+            favorites_df = read_csv(favorites_filename, usecols=favorites_columns)
+            user_df = read_csv(user_filename, usecols=user_columns)
+
+        except IOError:
+            tweet_df = None
+            favorites_df = None
+            user_df = None
+
+    except IOError:
+        tweet_df = None
+        favorites_df = None
+        user_df = None
+        bad_df = None
+        start_index = 0
+
+    return start_index, tweet_df, favorites_df, user_df, bad_df
+
 def save_progress():
     for df_data, df_cols, filename in (
         (tweet_tuples, tweet_columns, tweet_filename),
@@ -43,6 +67,8 @@ print("Setting Up Appropriate Variables...")
 
 accounts_filename = ""
 accounts_df = read_csv(accounts_filename)
+
+start_index, tweet_df, favorites_df, user_df, bad_df = load_saved_progress()
 
 bad_accounts = []
 
